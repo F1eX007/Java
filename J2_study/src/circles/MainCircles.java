@@ -9,6 +9,7 @@ public class MainCircles extends JFrame {
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
 
+    Background window = new Background();
     private Sprite[] sprites = new Sprite[10];
 
     public static void main(String[] args) {
@@ -23,11 +24,13 @@ public class MainCircles extends JFrame {
     private MainCircles() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(POS_X, POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
+
         setTitle("Circles");
         initApplication();
 
         MainCanvas canvas = new MainCanvas(this);
         add(canvas);
+        window.canvas = canvas;
         setVisible(true);
     }
 
@@ -38,6 +41,8 @@ public class MainCircles extends JFrame {
     }
 
     public void onCanvasRepainted(MainCanvas canvas, Graphics g, float deltaTime) {
+
+        window.SetBackground(deltaTime);
         update(canvas, deltaTime);
         render(canvas, g);
     }
